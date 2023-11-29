@@ -1,0 +1,147 @@
+#################################################################
+# neurofeedback実験プログラムのdefault値を設定する。
+#################################################################
+
+
+#################################################################
+# fMRIブロック情報のdefault値を設定する。
+# ----------------------------------------------
+# DEFAULT_CURRENT_BLOCK = Block番号のdefault値
+#
+
+DEFAULT_CURRENT_BLOCK = 5		# Block番号のdefault値
+
+
+QUIT_KEY_INUM = 3			# 中止キー文字の入力要求数
+REALIGN_VAL_NUM = 6			# Realignment parameterの配列数
+SSS_MAX_LEVEL = 7			# Stanford眠気尺度の最大レベル
+NG_SCORE_DISPLAY_TIME = 0.2		# 得点計算不可時の視覚feedback提示時間
+CAUTION_MSG_DELAY_SCAN_NUM = 10		# 警告MSGを出力する処理遅れのscan数
+CACHE_FNAME = cache.txt			# Cache file名
+
+
+REALIG_PARA_FNAME_PREFIX_CODE = rp_	# Realignment para fileの接頭文字
+
+
+#################################################################
+# ROI領域を選択する為の閾値のdefault値を設定する。
+# ----------------------------------------------
+# ROI_EPI_THRESHOLD		ROI EPI dataの閾値のdefault値
+# ROI_THRESHOLD			ROI,WM,GM,CSF dataの閾値のdefault値
+#
+# (*)
+# 非ゼロ要素の全voxelを採用する場合は、NONZERO_ELEMENTSを指定する。
+# ROI_THRESHOLD = 0.5
+#       -> 0.5以上のvoxelを採用する。(0.5を含む)
+# ROI_THRESHOLD = NONZERO_ELEMENTS
+#       -> ゼロでない全てのvoxelを採用する。
+#
+
+ROI_EPI_THRESHOLD = 500.0		# ROI EPI dataの閾値のdefault値
+ROI_THRESHOLD = NONZERO_ELEMENTS	# ROI,WM,GM,CSF dataの閾値のdefault値
+
+
+CLEANUP_WORK_FILES = 1		# 実験終了時に作業ファイルを(1:削除/0:残す)
+STD_DIALOG_BOX = 0		# (1:MATLAB標準/0:独自開発)dialog boxを用いる
+
+
+DEFAULT_MSOCKET_PORT = 3000		# msocket用TCP/IP portのdefault値
+DEFAULT_MSOCKET_TIMEOUT = 0.01		# msocketのtimeout時間 (sec)
+
+
+QUIT_KEY = ESCAPE		# 実験を途中で中止させるキー文字
+FMRI_TRIGGER_KEY = t		# fMRI装置からのScan開始信号のキー文字
+SLEEP_CHECK_KEY = b		# 被検者が寝ていないかのチェック用のキー文字
+
+
+#################################################################
+# フォント名(*) と フォントサイズ を設定する。
+# ----------------------------------------------
+# 
+# (*)
+# フォント名は、スペース文字[' ']より後の文字列は無視される。
+# アンダースコア['_']は、スペース[' ']に置き換える。
+# [例1]
+# FONT_NAME = Courier New
+# と指定すると、
+# FONT_NAME = 'Courier'
+# (スペース文字より後の文字列が無視され)となる。
+# [例2]
+# FONT_NAME = Courier_New
+# と指定した場合、
+# FONT_NAME = 'Courier New'
+# (アンダースコアがスペースに置き換えられ)となる。
+# 
+
+FONT_NAME = Courier_New		# フォント名
+FONT_SIZE = 80			# フォントサイズ
+
+
+#################################################################
+# feedback colorを設定する。
+# ----------------------------------------------
+# 変数名 = (RED, GEEN, BLUE)
+# 	(RED, GEEN, BLUEは各色0から255の範囲で指定)
+# 
+
+FEEDBACK_BG_COLOR = (170, 170, 170)		# 背景色
+FEEDBACK_TEXT_COLOR = (255, 255, 255)		# テキストの色
+FEEDBACK_GAZE_COLOR = (255, 255, 255)		# 注視点の色
+FEEDBACK_SCORE_CIRCLE_COLOR = (34, 139, 34)	# 獲得した得点の円(塗)の色
+FEEDBACK_MAX_SCORE_FRAME_COLOR = (34, 139, 34)	# 得点の上限の円(枠)の色
+FEEDBACK_HALF_SCORE_FRAME_COLOR = (140, 98, 126)# 得点の上限の50%の円(枠)の色
+
+
+#################################################################
+# feedbackの位置情報を設定する。
+# ------------------------------------------------------
+# 試行条件を告知するコメント文字列の表示位置を指定する変数
+# FEEDBACK_CONDITION_COMMENT_OFFSET
+# FEEDBACK_CONDITION_COMMENT_OFFSET_PSYCHTOOLBOX
+# FEEDBACK_CONDITION_COMMENT_OFFSET_MATLAB
+# 
+# ブロック終了時のコメント文字列の表示位置を指定する変数
+# FEEDBACK_FINISHED_COMMENT_OFFSET
+# FEEDBACK_FINISHED_COMMENT_OFFSET_PSYCHTOOLBOX
+# FEEDBACK_FINISHED_COMMENT_OFFSET_MATLAB
+# 
+# 得点文字列の表示位置を指定する変数
+# FEEDBACK_SCORE_TEXT_OFFSET
+# FEEDBACK_SCORE_TEXT_OFFSET_PSYCHTOOLBOX
+# FEEDBACK_SCORE_TEXT_OFFSET_MATLAB
+# 
+# 注視点の表示位置を指定する変数
+# FEEDBACK_GAZE_OFFSET
+# FEEDBACK_GAZE_OFFSET_PSYCHTOOLBOX
+# FEEDBACK_GAZE_OFFSET_MATLAB
+# 
+# 得点の円の表示位置を指定する変数
+# FEEDBACK_SCORE_CORCLE_OFFSET
+# FEEDBACK_SCORE_CORCLE_OFFSET_PSYCHTOOLBOX
+# FEEDBACK_SCORE_CORCLE_OFFSET_MATLAB
+# 
+# ( 変数名の最後が _PSYCHTOOLBOX の変数はPsychtoolboxで
+#   視覚提示する条件での表示位置を指定し、 _MATLAB の変数
+#   はMATLABで視覚提示する条件での表示位置を指定する。 
+#   それ以外は、両条件の表示位置を同時に指定する。 )
+# 
+# 変数名 = (X_OFFSET, Y_OFFSET)
+# 	中心位置からのX軸方向とY軸方向のoffsetを指定する。
+# 	X軸方向は +が右 -が左
+# 	Y軸方向は +が上 -が下
+# 
+# 
+
+# 試行条件を告知するコメント文字列
+FEEDBACK_CONDITION_COMMENT_OFFSET_PSYCHTOOLBOX = (0, 70)	# PSYCHTOOLBOX
+FEEDBACK_CONDITION_COMMENT_OFFSET_MATLAB       = (0, 40)	# MATLAB
+# ブロック終了時のコメント文字列
+FEEDBACK_FINISHED_COMMENT_OFFSET_PSYCHTOOLBOX = (0,120)	# PSYCHTOOLBOX
+FEEDBACK_FINISHED_COMMENT_OFFSET_MATLAB = (0,75)	# MATLAB
+# 得点文字列
+FEEDBACK_SCORE_TEXT_OFFSET_PSYCHTOOLBOX = (0, -10)	# PSYCHTOOLBOX
+FEEDBACK_SCORE_TEXT_OFFSET_MATLAB       = (0, -40)	# MATLAB
+# 注視点
+FEEDBACK_GAZE_OFFSET = (0, 0)
+# 得点の円
+FEEDBACK_SCORE_CORCLE_OFFSET = (0, 0)

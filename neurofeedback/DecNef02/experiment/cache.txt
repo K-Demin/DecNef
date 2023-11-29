@@ -1,0 +1,16 @@
+current_block = 5
+save_name = AB_Pilot_210122
+exp_id = AB_Pilot_AB_Pilot
+exp_date = 210122
+decnef_project = 2
+decnef_release = 20190929
+matlab_version = 9.14
+matlab_release = R2023a
+spm_version = SPM12
+spm_release = 7771
+receiver_num = 1
+msocket_port[1] = 3000
+msocket_server_name = MRI-RT
+dicom_dir = C:\DecNef\realtime\realtime_tranfert_test
+total_scan_num = 438
+TR = 0.867000 [sec]

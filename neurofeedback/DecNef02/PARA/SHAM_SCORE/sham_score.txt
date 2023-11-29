@@ -1,0 +1,6 @@
+sham_score[1] = 10.000000
+sham_score[2] = 20.000000
+sham_score[3] = 30.000000
+sham_score[4] = 40.000000
+sham_score[5] = 50.000000
+sham_score[6] = 60.000000

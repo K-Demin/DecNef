@@ -1,0 +1,24 @@
+# Ignore MATLAB auto-generated files
+*.asv
+*.m~
+*.mex*
+*.mat
+*.fig
+*.p
+*.psf
+
+# Ignore backup files
+*.bak
+
+# Ignore system-specific files
+Thumbs.db
+.DS_Store
+
+# Ignore compiled binaries
+*.exe
+*.dll
+*.out
+
+# Ignore logs and temporary files
+*.log
+*.tmp

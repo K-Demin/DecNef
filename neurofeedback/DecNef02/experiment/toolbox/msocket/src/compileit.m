@@ -1,6 +1,9 @@
 % Note: this only works in UNIX like systems
 % Run mex -setup first, and select the C compiler to
 % be a compiler that includes C++ routines
+% DKA 2023/06/02 added C++ routine here just in case
+
+mex -setup C++
 
 files = {'msconnect.c',...
   'msaccept.c',...

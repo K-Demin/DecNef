@@ -8,18 +8,18 @@ receiver_num = 3          # Number of receiver programs
 # data_top_dir   = Top directory of real-time MRI data
 # roi_top_dir    = Top directory of ROI file
 # save_dir       = Data store directory
-# 
+# Konstantin "Kostya" Demin: now all these dirs are defined relative to
+# the project_folder and are separator independent
 
-data_top_dir =C:\DecNef\realtime
-#data_top_dir = C:\Users\ROY_LAB\Desktop\Share\realtime
-#data_top_dir = \\Users\VincentTD\Documents\MATLAB\neurofeedback\DATA\DecNef\decnef08\realtime
-roi_top_dir = C:\DecNef\reference
-#roi_top_dir = C:\Users\ROY_LAB\Desktop\Share\reference
-#roi_top_dir = \\sonic.cns.atr.jp\yosio\neurofeedback\DATA\DecNef\decnef08\reference
-save_dir = C:\DecNef\Neurofeedback\DecNef02\DATA
-#save_dir = C:\Users\ROY_LAB\Documents\MATLAB\Neurofeedback\DecNef02\data
+data_top_dir = /realtime
+roi_top_dir = /reference
+save_dir = /neurofeedback/DecNef02/DATA
 
+####################################################
+# Konstantin "Kostya" Demin: now you should input the server ip address
+# here to not change anything in the code
 
+server_name = 172.17.32.99
 
 ####################################################
 # denoising_method = DETREND   Linear trend removal (*)

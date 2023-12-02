@@ -11,6 +11,12 @@ function [define, para, err] = load_parameters(define, para)
 % in the last fnction called here named set_parameters().
 %
 % See the parameter file for more info on each parameters.
+% Konstantin "Kostya" Demin UPD:
+% I've made data_top_dir, roi_top_dir and save_dir to be defined relative
+% to project_folder that is specified in log_collector, log_display or
+% create_global. It should improve transportability of the script
+% Now the script changes gData.para.msocket.server_name  (ip address)
+% to the one you put in parameters.txt
 
 err = struct('status', false, 'msg', []);
 
@@ -126,13 +132,13 @@ while true
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % directory
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+    global project_folder;
     if strncmp(str, 'data_top_dir', length('data_top_dir'))
       % Data top directory (data_top_dir)
       value = yoyo_sscanf('data_top_dir=%s', str);
       if length(value)
 	line_ok = true;
-	para.files.data_top_dir = value;
+	para.files.data_top_dir = fullfile(project_folder, value);
       end
     end	
     if strncmp(str, 'roi_top_dir', length('roi_top_dir'))
@@ -140,7 +146,7 @@ while true
       value = yoyo_sscanf('roi_top_dir=%s', str);
       if length(value)
 	line_ok = true;
-	para.files.roi_top_dir = value;
+	para.files.roi_top_dir = fullfile(project_folder, value);
       end
     end	
     if strncmp(str, 'save_dir', length('save_dir'))
@@ -148,10 +154,22 @@ while true
       value = yoyo_sscanf('save_dir=%s', str);
       if length(value)
 	line_ok = true;
-	para.files.save_dir = value;
+	para.files.save_dir = fullfile(project_folder, value);
       end
     end	
 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % server ip address
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    if strncmp(str, 'server_name', length('server_name'))
+      value = yoyo_sscanf('server_name=%s', str);
+      if length(value)
+	line_ok = true;
+	para.msocket.server_name = value;
+      end
+    end	
+    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % file
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

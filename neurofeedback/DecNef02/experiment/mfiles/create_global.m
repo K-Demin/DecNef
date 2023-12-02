@@ -16,6 +16,8 @@ end
 % This is probably the most important variable of this program as it
 % will store all the relevant information to process the data and display
 % the experiment. 
+% Konstantin "Kostya" Demin: added project_folder as global variable along
+% to improve transportability of the script
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 gData = struct(...
@@ -589,6 +591,14 @@ dot = struct(...
     'loopi',[]...
     );
 
+% DKA: Setup project_folder if it doesnt exist (it is located outside of gData)
+if ~exist('project_folder', 'var')
+    global project_folder;
+    scriptPath = mfilename('fullpath');
+    [pathToScript, ~, ~] = fileparts(scriptPath);
+    project_folder = fileparts(fileparts(fileparts(fileparts(pathToScript))));
+    % Declare project_folder as global
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of 'function create_data()' %

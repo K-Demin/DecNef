@@ -186,14 +186,14 @@ if err.status
               gData.para.msocket.port = PORT;
               gData.para.msocket.sock = SOCK; 
               
-              % This is to connect with the diplay computer.
-              %gData.para.msocket.sock_Disp = msocket(gData.define,gData.define.msocket.INITIALIZE_SERVER_DISP, gData.para);
+              % This is to connect with the display computer.
+              gData.para.msocket.sock_Disp = msocket(gData.define,gData.define.msocket.INITIALIZE_SERVER_DISP, gData.para);
 
-              %if gData.para.msocket.sock_Disp < 0 
-              %     err = sprintf('msocket: Connection refused (server:%s, port=%d)\n',...
-              %     gData.para.msocket.server_name, gData.para.msocket.port);
-              %     error(err);
-              %end
+              if gData.para.msocket.sock_Disp < 0 
+                   err = sprintf('msocket: Connection refused (server:%s, port=%d)\n',...
+                   gData.para.msocket.server_name, gData.para.msocket.port);
+                   error(err);
+              end
 
               % This will save the cache file (remember, the MRI-RT and
               % MRI-STIM computers will share the same cache file).
@@ -265,18 +265,18 @@ if err.status
               % Here we will save the collector data.
               % The display data will be saved by the display instance.
 
-              mkdir([gData.para.files.save_dir,'\',participant]);
-              mkdir([gData.para.files.save_dir,'\',participant,'\Day_',num2str(day)]);
+              mkdir(fullfile(gData.para.files.save_dir, participant));
+              mkdir(fullfile(gData.para.files.save_dir, participant,['Day_',num2str(day)]));
               
               if gData.GPU_Receiver
                  save_matname = sprintf('%s_%s%s',gData.para.save_name, gData.para.files.dicom_fnameB,'_RS_GPU.mat');
               else
                  save_matname = sprintf('%s_%s%s',gData.para.save_name, gData.para.files.dicom_fnameB,'_RS_NoGPU.mat');
               end
-              save_file_name = fullfile([gData.para.files.save_dir,'\',participant,'\Day_',num2str(day)], save_matname);
+              save_file_name = fullfile(gData.para.files.save_dir, participant, ['Day_',num2str(day)], save_matname);
 
               fprintf('Save Resting-state data (Matlab format)\n');
-              fprintf('  Data store dir  = ''%s''\n', [gData.para.files.save_dir,'\',participant,'\Day_',num2str(day)] );
+              fprintf('  Data store dir  = ''%s''\n', fullfile(gData.para.files.save_dir, participant,['Day_', num2str(day)]));
               fprintf('  Data store file = ''%s''\n', save_matname);
               fprintf('  Data store dir  = ''%s''\n', [gData.para.files.templ_image_dir] );
               fprintf('  Data store file = RS.mat \n');
@@ -284,7 +284,7 @@ if err.status
               % save those results in the reference and DATA directory.
               RS = gData.data.RS;
               save(save_file_name,'RS');
-              save([gData.para.files.templ_image_dir,'/RS.mat'], 'RS')
+              save([gData.para.files.templ_image_dir filesep 'RS.mat'], 'RS')
 
 
               % Close the msocket connection

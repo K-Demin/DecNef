@@ -182,7 +182,8 @@ for m=1:numel(PI)
         newprefix  = [spm_get_defaults('smooth.prefix') spm_get_defaults('normalise.write.prefix')];
         NO.descrip = sprintf('Smoothed (%gx%gx%g subopt) warped',job.fwhm);
     end
-    pos = findstr(NI.dat.fname, '\');
+    file_separator = filesep;
+    pos = strfind(NI.dat.fname, file_separator);
     NO.dat.fname = [NI.dat.fname(1:pos(end)),'w',NI.dat.fname(pos(end)+1:end)];
 
     dim            = size(Def);

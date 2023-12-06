@@ -4,6 +4,9 @@ function log_display()
 % The role of this function is to keep track of what was executed for each
 % participant during the experiment. so, here we will keep a log of the
 % parameters that were fed to the display_exp() function.
+% Konstantin "Kostya" Demin UPD:
+% Now log_display also sets project_folder as a global variable 
+% to improve transportability of the script
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % This generated the order of the 20 first participant.
@@ -58,9 +61,15 @@ painMax = 48.0;
 % Find the index of the participant's name in the list.
 index = find(strcmp(list, participant));
 
+% Load the root_folder in the workspace
+global project_folder; 
+scriptPath = mfilename('fullpath');
+[pathToScript, ~, ~] = fileparts(scriptPath);
+project_folder = fileparts(fileparts(fileparts(pathToScript)));
+
+
 % Load the participant order.
-%load('Y:\Neurofeedback\DecNef02\experiment\participant_order.mat');
-load('C:\DecNef\neurofeedback\DecNef02\experiment\participant_order.mat');
+load(fullfile(project_folder, 'neurofeedback', 'DecNef02', 'experiment', 'participant_order.mat'));
 
 % Get the condition associated with that participant.
 condition = participant_order(index);

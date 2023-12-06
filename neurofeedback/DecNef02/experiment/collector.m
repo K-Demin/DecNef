@@ -32,6 +32,7 @@ function collector(participant, day, GPU, condition, varargin)
 %
 % para_Calibration.txt is to be used with Calibration_FB.m if we want to 
 % compute the value of the decoder in real-time.
+% Konstantin "Kostya" Demin fixed file separators
 
 %%%%%%%%%%
 % Inputs:
@@ -217,7 +218,7 @@ if err.status
               cache_file(true);
               
               % Load the RS data for the online adjustment of feedback.
-              load([gData.para.files.templ_image_dir,'/RS.mat'])
+              load(fullfile(gData.para.files.templ_image_dir,'RS.mat'))
               gData.data.RS = RS;
 
               % create the GPU array that will hold the volume data
@@ -331,15 +332,15 @@ if err.status
               %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
               % Here we will save the collector data.
               % The display data will be saved by the display instance.
-              mkdir([gData.para.files.save_dir,'\',participant]);
-              mkdir([gData.para.files.save_dir,'\',participant,'\Day_',num2str(day)]);
+              mkdir(fullfile(gData.para.files.save_dir, participant));
+              mkdir(fullfile(gData.para.files.save_dir, participant,['Day_',num2str(day)]));
               
               save_matname = sprintf('%s_%s%s',gData.para.save_name, gData.para.files.dicom_fnameB,'_Collector.mat');
-              save_file_name = fullfile([gData.para.files.save_dir,'\',participant,'\Day_',num2str(day)], save_matname);
+              save_file_name = fullfile(gData.para.files.save_dir, participant, ['Day_',num2str(day)], save_matname);
               save(save_file_name,'gData');
 
               fprintf('Save online neurofeedback data (Matlab format)\n');
-              fprintf('  Data store dir  = ''%s''\n', [gData.para.files.save_dir,'\',participant,'\Day_',num2str(day)] );
+              fprintf('  Data store dir  = ''%s''\n', fullfile(gData.para.files.save_dir, participant,['Day_', num2str(day)]));
               fprintf('  Data store file = ''%s''\n', save_matname);
 
               %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

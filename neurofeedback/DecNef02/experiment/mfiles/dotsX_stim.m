@@ -5,7 +5,8 @@ function [y_temperatures, x_times] = dotsX_stim(painStim, stimType, tcs)
 % record thermal stim at the same time (otherwise it lags).
 % This was based on a script from Cody Cushing.
 % -VTD-
-% 
+% Konstantin "Kostya" Demin: some hot fixes basically related to 
+% the driect use of gData.dot.cpt instead of cpt variable
 global gData
 
 % If we do not deliver painful stimulations, then we will have to wait a
@@ -35,14 +36,15 @@ dontclear = gData.dot.dontclear;
 rtTimer=GetSecs;
 
 Screen('DrawingFinished',curWindow,dontclear);
-cpt = gData.dot.cpt;
+gData.dot.cpt = 1
+%cpt = gData.dot.cpt;
 while continue_show
 
     % after all computations, flip
     Screen('Flip', curWindow,0,dontclear);
     
     % now do drawing commands
-    Screen('DrawDots', curWindow, gData.dot.dot_show{cpt}, dotSize, dotColor, center(1,:));
+    Screen('DrawDots', curWindow, gData.dot.dot_show{gData.dot.cpt}, dotSize, dotColor, center(1,:));
 
     % This is to show the fixation during dotmotion.
     Screen('FrameOval', gData.data.feedback.window_id, gData.define.feedback.color.GAZE, gData.data.feedback.gaze_frame, 20, 20);
@@ -56,7 +58,7 @@ while continue_show
     if (GetSecs - rtTimer) >= gData.dot.maxDotTime  
         continue_show = 0;  
     else
-        cpt = cpt + 1;
+        gData.dot.cpt = gData.dot.cpt + 1;
     end
        
     if painStim
@@ -64,7 +66,7 @@ while continue_show
         % too much)
         switch stimType
             case 'Thermal'
-                if mod(cpt,3) == 0
+                if mod(gData.dot.cpt,3) == 0
                     % start_tcs can be used to compute the average time
                     % it takes to read from the probe (Already did and it is 0.0085s). 
                     %start_tcs = GetSecs;
@@ -79,7 +81,7 @@ while continue_show
                 end
         end
     else
-        if mod(cpt,3) == 0
+        if mod(gData.dot.cpt,3) == 0
             % There are no painful stimulations during neurofeedback. Here, I
             % computed the average time of reading from the probe and I will
             % stall the execution for a similar amount of time. That way, the
@@ -88,7 +90,7 @@ while continue_show
         end
     end
 end
-gData.dot.cpt = cpt;
+%gData.dot.cpt = cpt;
 
 end_time = GetSecs;
 %Priority(0);

@@ -25,7 +25,14 @@ function [] = receiver_Disp(GPU)
 % collector(): which collects the images processed by the receiver and run
 %               the real-time computations. This is executed on the processing computer.
 %
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Konstantin "Kostya" Demin edits:
+% added a GPU = 1 to be passed as default
+% added brooccoli directory to the path (the next section)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+if isempty(GPU)
+    GPU = 1;
+end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %            few things to add to the MATLAB path
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -36,6 +43,8 @@ addpath( fullfile(my_path, 'mfiles') );
 addpath( fullfile(my_path, 'utility') );
 addpath( fullfile(my_path, 'toolbox') );
 addpath( fullfile(my_path, 'toolbox', 'msocket') );
+addpath( fullfile(my_path, 'toolbox', 'BROCCOLI-master') );
+addpath( fullfile(my_path, 'toolbox', 'BROCCOLI-master', 'compiled', 'Matlab', 'Linux') );
 if exist('spm', 'file') == 0
   spm_search_path = {...
       '~/neurofeedback/toolbox/spm12',...

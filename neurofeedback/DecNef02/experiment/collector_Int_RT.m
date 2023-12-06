@@ -29,6 +29,7 @@ function collector_Int_RT(participant, day, task, GPU, GPU_Receiver, varargin)
 %               the real-time computations. This is executed on the processing computer.
 %
 % the file parameters.txt should be used by default.
+% Konstantin "Kostya" Demin: fixed file separators in a few places
 
 
 %%%%%%%%%%
@@ -229,7 +230,7 @@ if err.status
                   gData.para.scans.trial_num = 24;
                   % If it is the intensity session, load the models for the
                   % prediction of the ratings.
-                  load([gData.para.files.save_dir,'\',participant,'\',time,'\',participant,'_',time,'_Calibrate_Intensity_RT_Models_Results.mat'],'models');
+                  load(fullpath(gData.para.files.save_dir, participant, time, [participant,'_',time,'_Calibrate_Intensity_RT_Models_Results.mat']),'models');
                   % Initialise the variable to store the predicted values.
                   gData.data.model_pred = nan(gData.para.scans.trial_num,3);
               end
@@ -416,8 +417,8 @@ if err.status
               % Here we will save the collector data.
               % The display data will be saved by the display instance.
 
-              mkdir([gData.para.files.save_dir,'\',participant]);
-              mkdir([gData.para.files.save_dir,'\',participant,'\Day_',num2str(day)]);
+              mkdir(fullfile(gData.para.files.save_dir, participant));
+              mkdir(fullfile(gData.para.files.save_dir, participant,['Day_',num2str(day)]));
 
               if strcmp(task, 'Calibrate_Intensity')
                  save_matname = sprintf('%s_%s%s',gData.para.save_name, gData.para.files.dicom_fnameB,'_Collector_Calib_Int_RT.mat');
@@ -426,11 +427,11 @@ if err.status
                  save_matname = sprintf('%s_%s%s',gData.para.save_name, gData.para.files.dicom_fnameB,'_Collector_Int_RT.mat');
               end
               
-              save_file_name = fullfile([gData.para.files.save_dir,'\',participant,'\Day_',num2str(day)], save_matname);
+              save_file_name = fullfile(gData.para.files.save_dir, participant, ['Day_',num2str(day)], save_matname);
               save(save_file_name,'gData');
 
               fprintf('Save online neurofeedback data (Matlab format)\n');
-              fprintf('  Data store dir  = ''%s''\n', [gData.para.files.save_dir,'\',participant,'\Day_',num2str(day)] );
+              fprintf('  Data store dir  = ''%s''\n', fullfile(gData.para.files.save_dir, participant,['Day_', num2str(day)]));
               fprintf('  Data store file = ''%s''\n', save_matname);
 
               %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

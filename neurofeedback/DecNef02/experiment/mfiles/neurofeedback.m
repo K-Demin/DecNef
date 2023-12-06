@@ -1,5 +1,6 @@
 function [] = neurofeedback(participant, day)
 % Decoded Neurofeedback(DecNef) experiment main function
+% Konstantin "Kostya" Demin: fixed file separators in save
 
 global gData		  
 scan = 0;
@@ -108,16 +109,16 @@ end
 % Here we will save the Display data.
 % The collector data will be saved by the collector instance.
 
-mkdir([gData.para.files.save_dir,'\',participant]);
-mkdir([gData.para.files.save_dir,'\',participant,'\DecNef\']);
-mkdir([gData.para.files.save_dir,'\',participant,'\DecNef\Day_',num2str(day)]);
+mkdir(fullfile(gData.para.files.save_dir, participant));
+mkdir(fullfile(gData.para.files.save_dir, participant,'DecNef'));
+mkdir(fullfile(gData.para.files.save_dir, participant,'DecNef', ['Day_', num2str(day)]));
 
 save_matname = sprintf('%s_%s%s',gData.para.save_name, gData.para.files.dicom_fnameB,'_Display.mat');
-save_file_name = fullfile([gData.para.files.save_dir,'\',participant,'\DecNef\Day_',num2str(day)], save_matname);
+save_file_name = fullfile(gData.para.files.save_dir, participant,'DecNef', ['Day_', num2str(day)], save_matname);
 save(save_file_name,'gData');
 
 fprintf('Save online neurofeedback data (Matlab format)\n');
-fprintf('  Data store dir  = ''%s''\n', [gData.para.files.save_dir,'\',participant,'\DecNef\Day_',num2str(day)] );
+fprintf('  Data store dir  = ''%s''\n', fullfile(gData.para.files.save_dir, participant,'DecNef', ['Day_', num2str(day)]) );
 fprintf('  Data store file = ''%s''\n', save_matname);
 
 

@@ -56,8 +56,9 @@ if exist(dicom_file_name, 'file')
   iterations = 5;
   opencl_platform = 0; %type GetOpenCLInfo
   opencl_device = 0;
-  broccoli_location = [para.files.current_dir,'\toolbox\BROCCOLI-master\'];
-  load([broccoli_location,'\filters\filters_for_linear_registration.mat'])
+  broccoli_location = fullfile(para.files.current_dir,'\toolbox\BROCCOLI-master\');
+  load(fullfile(broccoli_location,'\filters\filters_for_linear_registration.mat'))
+
   
   % Relignment and reslincing is done here 
   [motion_corrected_volumes,motion_parameters] = MotionCorrectionMex(volumes,voxel_size_x,voxel_size_y,voxel_size_z,f1_parametric_registration,f2_parametric_registration,f3_parametric_registration,iterations,opencl_platform,opencl_device,broccoli_location);

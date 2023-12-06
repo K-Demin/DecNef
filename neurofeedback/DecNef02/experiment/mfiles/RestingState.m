@@ -1,5 +1,6 @@
 function RestingState(participant, day)
-
+% Konstantin "Kostya" Demin: uncommented msocket in send the start signal 
+% and fixed file separators in save
 global gData
 	
 % Intialize some variables
@@ -47,7 +48,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Send the start signal
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%msocket(gData.define, gData.define.msocket.SEND_DATA_DISP,gData.para, gData.define.command.SCAN_START);
+msocket(gData.define, gData.define.msocket.SEND_DATA_DISP,gData.para, gData.define.command.SCAN_START);
 gData.data.live_flag = true;
 
 %Start the experiment loop
@@ -100,15 +101,15 @@ visual_feedback(gData.define.feedback.FINISH);
 % Here we will save the Display data.
 % The collector data will be saved by the collector instance.
 
-mkdir([gData.para.files.save_dir,'\',participant]);
-mkdir([gData.para.files.save_dir,'\',participant,'\Day_',num2str(day)]);
+mkdir(fullfile(gData.para.files.save_dir, participant));
+mkdir(fullfile(gData.para.files.save_dir, participant,['Day_',num2str(day)]));
 
 save_matname = sprintf('%s_%s%s',gData.para.save_name, gData.para.files.dicom_fnameB,'_RS_Display.mat');
-save_file_name = fullfile([gData.para.files.save_dir,'\',participant,'\Day_',num2str(day)], save_matname);
+save_file_name = fullfile(gData.para.files.save_dir, participant, ['Day_',num2str(day)], save_matname);
 save(save_file_name,'gData');
 
 fprintf('Save online neurofeedback data (Matlab format)\n');
-fprintf('  Data store dir  = ''%s''\n', [gData.para.files.save_dir,'\',participant,'\Day_',num2str(day)] );
+fprintf('  Data store dir  = ''%s''\n', fullfile(gData.para.files.save_dir, participant,['Day_', num2str(day)]));
 fprintf('  Data store file = ''%s''\n', save_matname);
 
 

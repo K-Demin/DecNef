@@ -1,3 +1,4 @@
 *.png binary
 *.exe binary
 *.dcm binary
+*.nii binary

@@ -22,3 +22,7 @@ Thumbs.db
 # Ignore logs and temporary files
 *.log
 *.tmp
+
+# Ignore fMRI files
+.dcm
+.nii

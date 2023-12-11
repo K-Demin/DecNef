@@ -67,7 +67,7 @@ while gData.data.live_flag
   
   % RestTime indicate when we should enter a new scan. Therefore, when
   % this gets below or equal to 0, this means that a new TR can be executed 
-  % and we enter the next "if" statement.
+  % and we enter the next "if" statement.++
   
   % LocalTime is the time elapsed since the last scan. 
   RestTime = scan*gData.para.scans.TR - time;

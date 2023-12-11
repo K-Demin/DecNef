@@ -4,15 +4,15 @@
 AMD=0
 INTEL=1
 NVIDIA=2
-#OPENCL_PACKAGE=$INTEL
+OPENCL_PACKAGE=$INTEL
 #OPENCL_PACKAGE=$AMD
-OPENCL_PACKAGE=$NVIDIA
+
 # Set compilation mode to use
 RELEASE=0
 DEBUG=1
 COMPILATION=$RELEASE
 
-BROCCOLI_GIT_DIRECTORY=/home/kdemin/DecNef/neurofeedback/DecNef02/experiment/toolbox/BROCCOLI-master/
+BROCCOLI_GIT_DIRECTORY=`git rev-parse --show-toplevel`
 
 # Set directory containing opencl.h
 
@@ -26,12 +26,8 @@ elif [ "$OPENCL_PACKAGE" -eq "$INTEL" ] ; then
     OPENCL_HEADER_DIRECTORY2=/opt/intel/opencl-sdk/include/CL
 # Need to install Nvidia CUDA SDK first
 elif [ "$OPENCL_PACKAGE" -eq "$NVIDIA" ] ; then
-# Standard OPENCL
-#    OPENCL_HEADER_DIRECTORY1=/usr/include/CL 
-#    OPENCL_HEADER_DIRECTORY2=/usr/include/
-# Cuda
-    OPENCL_HEADER_DIRECTORY1=/usr/local/cuda/include/CL
-    OPENCL_HEADER_DIRECTORY2=/usr/local/cuda/include/
+    OPENCL_HEADER_DIRECTORY1=/usr/include/CL 
+    OPENCL_HEADER_DIRECTORY2=
 else
     echo "-------------------------------------"
     echo "Unknown OpenCL package!"
